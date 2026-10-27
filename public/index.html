@@ -595,12 +595,12 @@ html.lenis,html.lenis body{height:auto}
         </a>
       </div>
 
-      <div class="dashboard" data-reveal style="--rd:160ms">
+            <div class="dashboard" data-reveal style="--rd:160ms">
         <div class="dash-top">
-          <span>Pipeline · Q3</span>
+          <span>Pipeline · Live</span>
           <span class="dash-live"><span class="dot"></span>Live</span>
         </div>
-        <div class="dash-bars">
+        <div class="dash-bars" id="dash-bars">
           <div class="dash-bar" style="height:62%;transition-delay:0ms"></div>
           <div class="dash-bar" style="height:88%;transition-delay:90ms"></div>
           <div class="dash-bar" style="height:47%;transition-delay:180ms"></div>
@@ -610,10 +610,10 @@ html.lenis,html.lenis body{height:auto}
           <div class="dash-bar" style="height:58%;transition-delay:540ms"></div>
         </div>
         <div class="dash-rows">
-          <div class="dash-row"><span>Pipeline coverage</span><span class="dash-track"><span class="dash-fill" style="--w:90%"></span></span></div>
-          <div class="dash-row"><span>Forecast accuracy</span><span class="dash-track"><span class="dash-fill" style="--w:72%"></span></span></div>
-          <div class="dash-row"><span>Win rate</span><span class="dash-track"><span class="dash-fill" style="--w:48%"></span></span></div>
-          <div class="dash-row"><span>At-risk deals</span><span class="dash-track"><span class="dash-fill" style="--w:34%"></span></span></div>
+          <div class="dash-row"><span>New leads</span><span class="dash-track"><span class="dash-fill" id="fill-NEW" style="--w:90%"></span></span></div>
+          <div class="dash-row"><span>Qualified</span><span class="dash-track"><span class="dash-fill" id="fill-QUALIFIED" style="--w:72%"></span></span></div>
+          <div class="dash-row"><span>In negotiation</span><span class="dash-track"><span class="dash-fill" id="fill-NEGOTIATION" style="--w:48%"></span></span></div>
+          <div class="dash-row"><span>Closed won</span><span class="dash-track"><span class="dash-fill" id="fill-WON" style="--w:34%"></span></span></div>
         </div>
       </div>
     </div>
@@ -1744,6 +1744,27 @@ window.addEventListener('resize', onResize);
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape') closeAll();
   });
+})();
+</script>
+
+<script>
+(async () => {
+  try {
+    const res = await fetch('/api/stats/public');
+    if (!res.ok) return;
+    const s = await res.json();
+    if (!s.total) return; // no data yet: keep the placeholder numbers
+
+    const max = Math.max(...s.perDay, 1);
+    document.querySelectorAll('#dash-bars .dash-bar').forEach((bar, i) => {
+      bar.style.height = Math.max(8, Math.round((s.perDay[i] / max) * 100)) + '%';
+    });
+
+    for (const stage of ['NEW', 'QUALIFIED', 'NEGOTIATION', 'WON']) {
+      const pct = Math.round((s.byStage[stage] / s.total) * 100);
+      document.getElementById('fill-' + stage).style.setProperty('--w', pct + '%');
+    }
+  } catch (err) { /* offline or API down: the placeholder numbers stay */ }
 })();
 </script>
 
