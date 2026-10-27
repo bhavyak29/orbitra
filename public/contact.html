@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbitra — Contact Us</title>
+<meta name="description" content="Book a 15-minute demo, ask about pricing, or plan an enterprise rollout. The Orbitra team replies within one business day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.143.0/build/three.module.js",
+  "three/examples/jsm/": "https://unpkg.com/three@0.143.0/examples/jsm/"
+}}
+</script>
+
+<style>
+:root{
+  --bg:#04060f; --bg-2:#060a18; --ink:#f3f6ff; --muted:#9aa6c4; --muted-2:#6b7796;
+  --line:rgba(150,175,230,.12); --line-strong:rgba(150,175,230,.22);
+  --accent:#5df0a8; --accent-2:#2fd38a; --accent-ink:#032018;
+  --glass:rgba(12,18,38,.55); --glass-2:rgba(16,24,48,.65);
+  --radius:18px; --radius-lg:26px; --maxw:1180px;
+  --hero-gap:clamp(32px,5vh,52px);   /* same value as index.html */
+  --shadow:0 30px 80px -30px rgba(0,0,0,.75);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+/* Lenis */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+/* staggered scroll-reveal */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1);transition-delay:var(--rd,0ms);will-change:opacity,transform}
+[data-reveal].in{opacity:1;transform:none}
+/* fixed WebGL planet behind everything, never grabs pointer/scroll */
+.planet-canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1}
+.section{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:clamp(80px,12vw,160px) 24px}
+.eyebrow{display:inline-block;font-size:20px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.section-head{max-width:680px;margin:0 auto clamp(48px,6vw,80px);text-align:center}
+.section-head h2,.showcase-copy h2,.cta-card h2{font-size:clamp(30px,4.4vw,50px);font-weight:800;line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 40px rgba(0,0,0,.6)}
+.section-head p{margin-top:18px;color:var(--muted);font-size:18px;line-height:1.65;text-shadow:0 1px 24px rgba(0,0,0,.55)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .25s ease,background .2s ease,border-color .2s ease;white-space:nowrap}
+.btn svg{width:17px;height:17px}
+.btn-primary{color:var(--accent-ink);background:linear-gradient(180deg,var(--accent),var(--accent-2));box-shadow:0 10px 30px -8px rgba(93,240,168,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(93,240,168,.7)}
+.btn-outline{color:var(--ink);background:rgba(255,255,255,.04);border-color:var(--line-strong);backdrop-filter:blur(10px)}
+.btn-outline:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.btn-ghost{color:var(--ink);background:rgba(255,255,255,.05);border-color:var(--line-strong);padding:9px 18px}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+/* ---------- nav ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;max-width:var(--maxw);margin:0 auto;padding:22px 24px;position:relative;z-index:2}
+.brand{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:19px;letter-spacing:.16em}
+.brand-mark{display:inline-block;color:var(--accent);font-size:14px;transform:translateY(-1px)}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:14.5px;color:var(--muted);transition:color .2s ease}
+.nav-links a:hover{color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{min-height:auto;display:flex;flex-direction:column;position:relative;background:radial-gradient(125% 62% at 50% -10%, rgba(4,6,15,.82) 0%, rgba(4,6,15,.28) 44%, transparent 68%)}
+.hero-inner{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:var(--hero-gap) 24px 0}
+.hero-title{font-size:clamp(34px,5.2vw,62px);font-weight:800;line-height:1.04;letter-spacing:-.03em;max-width:15ch;text-shadow:0 2px 50px rgba(0,0,0,.55)}
+.hero-title em{font-style:normal;background:linear-gradient(180deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin-top:24px;max-width:560px;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--muted)}
+.hero-actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- logos ---------- */
+.logos{text-align:center;padding:0 24px clamp(36px,6vw,64px);position:relative;z-index:2}
+.logos-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2)}
+.logos-row{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,5vw,56px);margin-top:20px}
+.logo{font-size:17px;font-weight:700;color:var(--muted-2);opacity:.8;transition:opacity .2s ease,color .2s ease}
+.logo:hover{opacity:1;color:var(--ink)}
+
+/* ---------- features ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;padding:30px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);overflow:hidden;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 120% at 0% 0%, rgba(93,240,168,.08), transparent 45%);opacity:0;transition:opacity .3s ease;pointer-events:none}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:var(--glass-2)}
+.card:hover::before{opacity:1}
+.card-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent);background:rgba(93,240,168,.1);border:1px solid rgba(93,240,168,.18);margin-bottom:18px}
+.card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.card p{font-size:15px;color:var(--muted);line-height:1.6}
+
+/* ---------- showcase + stats ---------- */
+.showcase-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(36px,6vw,72px);align-items:center}
+.showcase-copy{text-align:left}
+.showcase-copy p{margin-top:18px;color:var(--muted);font-size:18px;line-height:1.65}
+.showcase-copy .btn{margin-top:32px}
+.dashboard{position:relative;padding:24px;border-radius:var(--radius-lg);background:var(--glass-2);border:1px solid var(--line-strong);box-shadow:var(--shadow);backdrop-filter:blur(18px);overflow:hidden}
+.dashboard::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(160deg, rgba(93,240,168,.35), transparent 40%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;font-weight:700;font-size:15px}
+.dash-live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--accent)}
+.dash-live .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block}
+.dash-bars{display:flex;align-items:flex-end;gap:10px;height:150px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px}
+.dash-bar{flex:1;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,var(--accent),rgba(47,211,138,.25));transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.22,.7,.2,1)}
+.dashboard.in .dash-bar{transform:scaleY(1)}
+.dash-rows{display:grid;gap:14px;margin-top:18px}
+.dash-row{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;font-size:13.5px;color:var(--muted)}
+.dash-track{height:8px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+.dash-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent-2),var(--accent));width:0;transition:width .8s cubic-bezier(.22,.7,.2,1) .3s}
+.dashboard.in .dash-fill{width:var(--w)}
+.stats{margin-top:clamp(56px,8vw,96px);display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{text-align:center;padding:30px 18px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.stat-value{display:block;font-size:clamp(30px,4vw,44px);font-weight:800;background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-label{font-size:14px;color:var(--muted);margin-top:8px}
+
+/* ---------- cta + footer ---------- */
+.cta-card{position:relative;text-align:center;max-width:760px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(28px,5vw,64px);border-radius:var(--radius-lg);background:radial-gradient(120% 140% at 50% 0%, rgba(93,240,168,.12), transparent 55%), var(--glass-2);border:1px solid var(--line-strong);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.cta-card p{margin-top:18px;color:var(--muted);font-size:18px;line-height:1.65}
+.cta-card .hero-actions{margin-top:0}
+.footer{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-top:clamp(64px,9vw,110px);padding-top:48px;border-top:1px solid var(--line)}
+.footer-brand p{margin-top:12px;color:var(--muted);font-size:14px;max-width:280px;line-height:1.6}
+.footer-cols{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted-2);margin-bottom:14px}
+.footer-col a{display:block;font-size:14px;color:var(--muted);margin-bottom:10px;transition:color .2s ease}
+.footer-col a:hover{color:var(--ink)}
+.copyright{text-align:center;margin-top:56px;font-size:13px;color:var(--muted-2)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .showcase-grid{grid-template-columns:1fr;text-align:center}
+  .showcase-copy{text-align:center}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  .nav-links{display:none}
+  .nav{padding:18px 20px}
+  .section{padding:clamp(64px,16vw,110px) 20px}
+}
+@media (max-width:560px){
+  .feature-grid{grid-template-columns:1fr}
+  .dash-row{grid-template-columns:90px 1fr}
+  .hero-actions .btn,.cta-card .hero-actions .btn{flex:1}
+  .cta-card{padding:40px 22px}
+  .footer{flex-direction:column}
+}
+@media (max-width:380px){
+  .stats{grid-template-columns:1fr}
+  .logo{font-size:14px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  [data-reveal]{opacity:1 !important;transform:none !important;transition:none !important}
+  .dash-bar,.dash-fill{transition:none !important}
+  .dashboard .dash-bar{transform:scaleY(1) !important}
+  .dashboard .dash-fill{width:var(--w) !important}
+}
+
+/* push footer to the bottom: remove the empty space under the copyright */
+.section.cta{padding-bottom:20px}
+.copyright{margin-top:40px;padding-bottom:0}
+
+/* nav: logo to far left, button to far right, links centered */
+.nav{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  width:100%;
+  max-width:var(--maxw);
+}
+.nav .brand{justify-self:start}
+.nav .btn{justify-self:end}
+
+@media (max-width:720px){
+  .nav{display:flex;justify-content:space-between}
+}
+
+/* tighter spacing between sections (matches your other pages) */
+.section.contact{padding-top:var(--hero-gap);padding-bottom:calc(var(--hero-gap) / 2)}
+.section.cta{padding-top:calc(var(--hero-gap) / 2)}
+
+/* form box matches the height of the info column */
+.section.contact .showcase-grid{align-items:stretch}
+.section.contact form.dashboard > div:nth-of-type(2){flex:1;grid-template-rows:repeat(4,auto) 1fr}
+.section.contact form.dashboard textarea{height:100%;min-height:96px;resize:none}
+
+/* readable dropdown options */
+.section.contact select{color-scheme:dark}
+.section.contact select option{background:#0c1226;color:var(--ink)}
+
+/* more space between CTA text and buttons */
+.cta-card .hero-actions{margin-top:32px}
+
+/* ---------- mega menu ---------- */
+.nav{z-index:20}                       /* keep the menu above the logos and sections */
+.nav-item{position:static}
+.nav-links .nav-trigger{display:inline-flex;align-items:center;gap:6px}
+.nav-trigger svg{width:14px;height:14px;transition:transform .2s ease}
+.nav-item:hover .nav-trigger,.nav-item:focus-within .nav-trigger{color:var(--ink)}
+.nav-item:hover .nav-trigger svg,.nav-item:focus-within .nav-trigger svg{transform:rotate(180deg)}
+
+.mega{position:absolute;top:calc(100% - 12px);left:50%;width:min(880px,calc(100vw - 48px));padding-top:12px;
+  opacity:0;visibility:hidden;transform:translate(-50%,8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s}
+.nav-item:hover .mega,.nav-item:focus-within .mega{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.mega-panel{padding:22px;border-radius:var(--radius-lg);background:rgba(10,15,32,.94);border:1px solid var(--line-strong);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+
+.nav-links .mega-banner{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-radius:var(--radius);background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:17px;font-weight:700;color:var(--ink)}
+.mega-banner svg{width:18px;height:18px;color:var(--accent)}
+.mega-banner:hover{background:rgba(255,255,255,.08)}
+
+.mega-cols{display:grid;grid-template-columns:1.1fr 1.1fr .8fr;gap:28px;margin-top:22px}
+.mega-col h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin:0 0 10px 10px}
+.nav-links .mega-link{display:flex;align-items:flex-start;gap:12px;padding:10px;border-radius:12px;color:var(--ink);transition:background .2s ease}
+.nav-links .mega-link:hover{background:rgba(255,255,255,.06)}
+.mega-ico{flex:none;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent);background:rgba(93,240,168,.1);border:1px solid rgba(93,240,168,.18)}
+.mega-ico svg{width:18px;height:18px}
+.mega-link b{display:block;font-size:14.5px;font-weight:600}
+.mega-link small{display:block;font-size:12.5px;line-height:1.4;color:var(--muted);margin-top:2px}
+.nav-links .mega-plain{display:flex;align-items:center;justify-content:space-between;padding:11px 10px;border-radius:12px;font-size:14.5px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--line)}
+.nav-links .mega-plain:hover{background:rgba(255,255,255,.06)}
+.mega-plain svg{width:15px;height:15px;color:var(--accent)}
+
+/* footer: room for the 5th column */
+.footer-cols{gap:40px}
+.footer-brand{flex:none}
+@media (max-width:720px){
+  .footer-cols{gap:32px 40px}
+}
+
+
+</style>
+
+</style>
+</head>
+<body>
+
+<canvas class="planet-canvas"></canvas>
+
+<div class="page" id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <nav class="nav">
+      <a href="index.html" class="brand"><span class="brand-mark">▲</span>Orbitra</a>
+      <div class="nav-links">
+  <div class="nav-item">
+    <a href="platform.html" class="nav-trigger">Platform
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+
+    <div class="mega">
+      <div class="mega-panel">
+        <a href="platform.html" class="mega-banner">Explore the Orbitra platform
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+
+        <div class="mega-cols">
+          <div class="mega-col">
+            <h4>Applications</h4>
+            <a href="platform.html#signal-workflows" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M6 9v3a3 3 0 0 0 3 3h3"/></svg></span>
+              <span><b>Signal workflows</b><small>Buyer signals into next steps</small></span>
+            </a>
+            <a href="platform.html#revenue-forecasting" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-4"/><path d="M13 16V8"/><path d="M18 16v-7"/></svg></span>
+              <span><b>Revenue forecasting</b><small>Live forecasts with confidence ranges</small></span>
+            </a>
+            <a href="platform.html#conversation-intelligence" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span><b>Conversation intelligence</b><small>What buyers actually say</small></span>
+            </a>
+            <a href="platform.html#ai-agents" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></span>
+              <span><b>AI agents</b><small>Meeting prep, CRM updates, follow-ups</small></span>
+            </a>
+          </div>
+
+          <div class="mega-col">
+            <h4>Platform</h4>
+            <a href="platform.html#pipeline-map" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></span>
+              <span><b>Live pipeline map</b><small>Every open deal by region and stage</small></span>
+            </a>
+            <a href="platform.html#territory-insights" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span><b>Territory &amp; team insights</b><small>Compare regions, reps, segments</small></span>
+            </a>
+            <a href="platform.html#integrations-detail" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6"/><path d="M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0Z"/><path d="M12 18v4"/></svg></span>
+              <span><b>Integrations</b><small>CRM, email, and calling tools</small></span>
+            </a>
+            <a href="platform.html#security-governance" class="mega-link">
+              <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <span><b>Security &amp; governance</b><small>SOC 2, SSO, auditable AI</small></span>
+            </a>
+          </div>
+
+          <div class="mega-col">
+            <h4>Explore</h4>
+            <a href="solutions.html" class="mega-plain">Solutions
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a href="pricing.html" class="mega-plain">Pricing &amp; plans
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a href="contact.html" class="mega-plain">Book a demo
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a href="signup.html?plan=growth" class="mega-plain">Start free trial
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-item">
+  <a href="solutions.html" class="nav-trigger">Solutions
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </a>
+
+  <div class="mega">
+    <div class="mega-panel">
+      <a href="solutions.html" class="mega-banner">Explore Orbitra solutions
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+
+      <div class="mega-cols">
+        <div class="mega-col">
+          <h4>By role</h4>
+          <a href="solutions.html#sales-leaders" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span>
+            <span><b>Sales Leaders</b></span>
+          </a>
+          <a href="solutions.html#revops" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4h-7"/><path d="M10 4H3"/><path d="M21 12h-9"/><path d="M8 12H3"/><path d="M21 20h-5"/><path d="M12 20H3"/><path d="M14 2v4"/><path d="M8 10v4"/><path d="M16 18v4"/></svg></span>
+            <span><b>RevOps</b></span>
+          </a>
+          <a href="solutions.html#enterprise-teams" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></span>
+            <span><b>Enterprise Teams</b></span>
+          </a>
+        </div>
+
+        <div class="mega-col">
+          <h4>Industries</h4>
+          <a href="solutions.html#technology" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 13v4"/><path d="M12 13v4"/><path d="M16 13v4"/></svg></span>
+            <span><b>Technology</b></span>
+          </a>
+          <a href="solutions.html#financial-services" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 10v8"/><path d="M10 10v8"/><path d="M14 10v8"/><path d="M19 10v8"/><path d="M3 20h18"/></svg></span>
+            <span><b>Financial Services</b></span>
+          </a>
+          <a href="solutions.html#healthcare" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></span>
+            <span><b>Healthcare</b></span>
+          </a>
+          <a href="solutions.html#manufacturing" class="mega-link">
+            <span class="mega-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg></span>
+            <span><b>Manufacturing</b></span>
+          </a>
+        </div>
+
+        <div class="mega-col">
+          <h4>Explore</h4>
+          <a href="platform.html" class="mega-plain">Platform
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="pricing.html" class="mega-plain">Pricing &amp; plans
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="contact.html" class="mega-plain">Book a demo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="signup.html?plan=growth" class="mega-plain">Start free trial
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        <a href="pricing.html">Pricing</a>
+        <a href="company.html">About Us</a>
+      </div>
+      <a href="contact.html" class="btn btn-ghost">Book a Demo</a>
+    </nav>
+
+    <div class="hero-inner">
+      <span class="eyebrow" data-reveal style="--rd:0ms">Get in touch</span>
+      <h1 class="hero-title" data-reveal style="--rd:80ms">Let's Talk <em>Revenue</em>.</h1>
+      <p class="hero-sub" data-reveal style="--rd:180ms">Book a 15-minute demo, ask about pricing, or plan an enterprise rollout. Our team replies within one business day.</p>
+    </div>
+  </header>
+
+  <!-- ===================== CONTACT FORM + INFO ===================== -->
+  <section class="section contact" id="contact-form">
+    <div class="showcase-grid">
+
+      <div class="showcase-copy">
+        <span class="eyebrow" data-reveal style="--rd:0ms">Book a demo</span>
+        <h2 data-reveal style="--rd:90ms">Tell us about your team</h2>
+        <p data-reveal style="--rd:180ms">Whether you're evaluating Orbitra for a 5-person team or a 500-person global org, we'll match you with the right specialist and show the platform on your own use case.</p>
+
+        <div style="display:grid;gap:16px;margin-top:32px">
+          <div class="card" data-reveal style="--rd:0ms">
+            <h3 style="font-size:15px;margin-bottom:4px">Sales & demos</h3>
+            <p style="font-size:14px">sales@orbitra.com</p>
+          </div>
+          <div class="card" data-reveal style="--rd:90ms">
+            <h3 style="font-size:15px;margin-bottom:4px">Support</h3>
+            <p style="font-size:14px">support@orbitra.com </p>
+          </div>
+          <div class="card" data-reveal style="--rd:180ms">
+            <h3 style="font-size:15px;margin-bottom:4px">Partnerships & Press</h3>
+            <p style="font-size:14px">press@orbitra.com</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="demo-form" class="dashboard" data-reveal style="--rd:160ms;display:flex;flex-direction:column;gap:16px">
+        <div class="dash-top" style="margin-bottom:0">
+          <span>Book your demo</span>
+        </div>
+
+        <div style="display:grid;gap:14px">
+          <input type="text" name="name" placeholder="Full name" required
+            style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--font);font-size:14.5px">
+          <input type="email" name="email" placeholder="Work email" required
+            style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--font);font-size:14.5px">
+          <input type="text" name="company" placeholder="Company"
+            style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--font);font-size:14.5px">
+          <select name="teamSize" style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--font);font-size:14.5px">
+            <option>Team size: 1–10</option>
+            <option>Team size: 11–50</option>
+            <option>Team size: 51–200</option>
+            <option>Team size: 200+</option>
+          </select>
+          <textarea name="message" placeholder="What would you like to improve: forecasting, pipeline, coaching?" rows="4"
+            style="width:100%;padding:13px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--font);font-size:14.5px;resize:vertical"></textarea>
+          <!-- honeypot: hidden from people, bots fill it in -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        </div>
+
+        <button type="submit" id="demo-btn" class="btn btn-primary" style="justify-content:center;width:100%">Book My Demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p id="demo-status" role="status" style="font-size:14px;min-height:20px;color:var(--muted)"></p>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ===================== CTA + FOOTER ===================== -->
+  <section class="section cta" id="cta">
+    <div class="cta-card">
+      <span class="eyebrow" data-reveal style="--rd:60ms">Prefer to explore first?</span>
+      <h2 data-reveal style="--rd:140ms">Take the platform for a spin</h2>
+      <p data-reveal style="--rd:220ms">Start a free trial with no credit card and no sales call required, or see how our plans compare.</p>
+      <div class="hero-actions" data-reveal style="--rd:300ms">
+        <a href="pricing.html" class="btn btn-outline">See Pricing</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="brand-mark">▲</span>Orbitra</a>
+        <p>The revenue AI platform for ambitious teams.</p>
+      </div>
+      <div class="footer-cols">
+  <div class="footer-col">
+    <h4>Product</h4>
+<a href="platform.html#signal-workflows">Signal workflows</a>
+<a href="platform.html#revenue-forecasting">Revenue forecasting</a>
+<a href="platform.html#conversation-intelligence">Conversation intelligence</a>
+<a href="platform.html#ai-agents">AI agents</a>
+<a href="platform.html#pipeline-map">Live pipeline map</a>
+<a href="platform.html#territory-insights">Territory &amp; team insights</a>
+<a href="platform.html#integrations-detail">Integrations</a>
+<a href="platform.html#security-governance">Security &amp; governance</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Solutions</h4>
+<a href="solutions.html#sales-leaders">Sales Leaders</a>
+<a href="solutions.html#revops">RevOps</a>
+<a href="solutions.html#enterprise-teams">Enterprise Teams</a>
+<a href="solutions.html#technology">Technology</a>
+<a href="solutions.html#financial-services">Financial Services</a>
+<a href="solutions.html#healthcare">Healthcare</a>
+<a href="solutions.html#manufacturing">Manufacturing</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Resources</h4>
+    <a href="platform.html">Take the product tour</a>
+    <a href="resources.html#library">Resource library</a>
+    <a href="resources.html#blog">Blog</a>
+    <a href="index.html#testimonials">Customer stories</a>
+    <a href="resources.html#events">Events</a>
+    <a href="resources.html#release-notes">Product release notes</a>
+    <a href="resources.html#faqs">FAQs</a>
+    <a href="resources.html#glossary">Revenue AI glossary</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="company.html">About Us</a>
+    <a href="careers.html">Careers</a>
+    <a href="pricing.html">Pricing &amp; plans</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html">Book a demo</a>
+    <a href="app.html">Log in</a>
+  </div>
+
+  <div class="footer-col">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <a href="security.html">Security</a>
+  </div>
+</div>
+    </div>
+
+    <div class="copyright">© <span id="year"></span> Orbitra, Inc. All rights reserved.</div>
+  </section>
+
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader.js';
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import Lenis from 'https://unpkg.com/lenis@1.3.23/dist/lenis.mjs';
+
+/* ================================================================
+   PAGE CHROME: reduced-motion, smooth scroll, reveal, footer year
+   ================================================================ */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+if(!REDUCED){
+  const lenis = new Lenis({ duration:1.15, smoothWheel:true, touchMultiplier:1.5 });
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+}
+
+const revealEls = document.querySelectorAll('[data-reveal]');
+if(REDUCED){
+  revealEls.forEach(el => el.classList.add('in'));
+} else {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.18, rootMargin:'0px 0px -8% 0px' });
+  revealEls.forEach(el => io.observe(el));
+}
+
+/* ================================================================
+   WEBGL PLANET SCENE
+   ================================================================ */
+const CONFIG = {
+  rimColor:'#c1faff', rimPower:2.4, nightLights:10, terrainDepth:0.33, terrainShade:1.3,
+  oceanGlint:0.45, oceanDeep:0.12, oceanFlow:3, oceanFlowSpeed:0.8, oceanFlowScale:2.1,
+  glowColor:'#3a6cff', glowIntensity:3.35, planetRadius:1.95, spin:0.03, initRotation:2.07,
+  tilt:0.37, autoRotate:0,
+  cloud1Height:1.005, cloud1Opacity:0.6, cloud1Spin:0.06,
+  cloud2Height:1.03, cloud2Opacity:0.5, cloud2Spin:0.14,
+  cloud3Height:1.075, cloud3Opacity:0.5, cloud3Spin:0.1,
+  bgColor:'#040a1e', flameColor:'#3a6cff', flameColor2:'#c1faff', flameAmt:0.15,
+  atmoColor:'#9fc4ff', atmoCount:320, atmoSize:22, atmoSpeed:0.8,
+  starColor:'#cfe0ff', starCount:1400, starSize:1.6, starFlicker:1,
+  markerColor:'#ffd27a', markerCount:60, markerSize:16, markerSpeed:0.5,
+};
+const LAYERS = { NONE:0, TORUS_SCENE:1, BLOOM_SCENE:2, ENTIRE_SCENE:3 };
+
+const ASSET_BASE_URL = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/ascend-d9857ad1f2';
+const PLANET_GLB = ASSET_BASE_URL + '/planet.glb';
+const PLANET_LIGHTS_GLB = ASSET_BASE_URL + '/planet-lights.glb';
+const PLANET_CLOUDS_PNG = ASSET_BASE_URL + '/planet-clouds.png';
+
+/* ---------- helpers ---------- */
+function Lerp(a,b,t){ return a + (b - a) * t; }
+function clamp(v,lo,hi){ return Math.min(hi, Math.max(lo, v)); }
+function hexToVec3(hex){
+  const c = new THREE.Color(hex);
+  return new THREE.Vector3(c.r, c.g, c.b);
+}
+function smoothstepT(t){ return t*t*(3-2*t); }
+function sample(stops, p){
+  if(p <= stops[0].p) return stops[0].v;
+  const last = stops[stops.length-1];
+  if(p >= last.p) return last.v;
+  for(let i=0;i<stops.length-1;i++){
+    const a = stops[i], b = stops[i+1];
+    if(p >= a.p && p <= b.p){
+      const t = (b.p === a.p) ? 0 : (p - a.p) / (b.p - a.p);
+      return Lerp(a.v, b.v, smoothstepT(t));
+    }
+  }
+  return last.v;
+}
+
+/* ---------- shared simplex noise (GLSL) ---------- */
+const SNOISE = `
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+float snoise(vec3 v){
+  const vec2 C = vec2(1.0/6.0, 1.0/3.0); const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+  vec3 i = floor(v + dot(v, C.yyy)); vec3 x0 = v - i + dot(i, C.xxx);
+  vec3 g = step(x0.yzx, x0.xyz); vec3 l = 1.0 - g;
+  vec3 i1 = min(g.xyz, l.zxy); vec3 i2 = max(g.xyz, l.zxy);
+  vec3 x1 = x0 - i1 + 1.0 * C.xxx; vec3 x2 = x0 - i2 + 2.0 * C.xxx; vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+  i = mod(i, 289.0);
+  vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+  float n_ = 1.0/7.0; vec3 ns = n_ * D.wyz - D.xzx;
+  vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+  vec4 x_ = floor(j * ns.z); vec4 y_ = floor(j - 7.0 * x_);
+  vec4 x = x_ *ns.x + ns.yyyy; vec4 y = y_ *ns.x + ns.yyyy; vec4 h = 1.0 - abs(x) - abs(y);
+  vec4 b0 = vec4(x.xy, y.xy); vec4 b1 = vec4(x.zw, y.zw);
+  vec4 s0 = floor(b0)*2.0 + 1.0; vec4 s1 = floor(b1)*2.0 + 1.0; vec4 sh = -step(h, vec4(0.0));
+  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy; vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+  vec3 p0 = vec3(a0.xy,h.x); vec3 p1 = vec3(a0.zw,h.y); vec3 p2 = vec3(a1.xy,h.z); vec3 p3 = vec3(a1.zw,h.w);
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+  vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0); m = m * m;
+  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+}
+`;
+
+/* ---------- renderer / scene / camera ---------- */
+const canvas = document.querySelector('.planet-canvas');
+const renderer = new THREE.WebGL1Renderer({ canvas, antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(0, 0, 8);
+camera.layers.enable(LAYERS.TORUS_SCENE);
+camera.layers.enable(LAYERS.BLOOM_SCENE);
+camera.layers.enable(LAYERS.ENTIRE_SCENE);
+scene.add(camera);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
+ambientLight.layers.set(LAYERS.ENTIRE_SCENE);
+scene.add(ambientLight);
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(0, 10, 2);
+dirLight.layers.set(LAYERS.ENTIRE_SCENE);
+scene.add(dirLight);
+
+/* ---------- FinalPass (bg + corner-flame composite) ---------- */
+const FinalPass = {
+  uniforms: {
+    iTime:{value:0}, tDiffuse:{value:null}, torusTexture:{value:null}, bloomTexture:{value:null}, haloTexture:{value:null},
+    uBg:{value:hexToVec3(CONFIG.bgColor)}, uFlameA:{value:hexToVec3(CONFIG.flameColor)},
+    uFlameB:{value:hexToVec3(CONFIG.flameColor2)}, uFlameAmt:{value:CONFIG.flameAmt},
+  },
+  vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position, 1.0); }`,
+  fragmentShader: `
+    uniform float iTime; uniform sampler2D tDiffuse; uniform sampler2D bloomTexture; uniform sampler2D torusTexture; uniform sampler2D haloTexture;
+    uniform vec3 uBg; uniform vec3 uFlameA; uniform vec3 uFlameB; uniform float uFlameAmt;
+    varying vec2 vUv;
+    vec3 warp3d(vec3 pos, float t){ float curv=.8,a=1.9,b=0.7; pos*=2.;
+      pos.x+=curv*sin(t+a*pos.y)+t*b; pos.y+=curv*cos(t+a*pos.x);
+      pos.y+=curv*sin(t+a*pos.z)+t*b; pos.z+=curv*cos(t+a*pos.y);
+      pos.z+=curv*sin(t+a*pos.x)+t*b; pos.x+=curv*cos(t+a*pos.z);
+      return 0.5+0.5*cos(pos.xyz+vec3(1,2,4)); }
+    void main(){
+      vec2 uv = 2.*vUv - 1.;
+      vec3 w = pow(warp3d(vec3(uv.x, sin(uv.y), uv.y), iTime*1.5), vec3(1.5));
+      vec3 flame = 1.5*uFlameA*w.x; flame*=w.y; flame += uFlameB*w.z;
+      flame *= smoothstep(0.25, 1., abs(uv.y));
+      float md = smoothstep(-0.7, 1., -uv.y*uv.x); flame *= md*md;
+      vec3 bg = uBg * (1.0 - 0.4 * length(uv));
+      vec3 halo = texture2D(haloTexture, vUv).xyz;
+      gl_FragColor = vec4(bg + flame*uFlameAmt + texture2D(bloomTexture, vUv).xyz + texture2D(torusTexture, vUv).xyz + texture2D(tDiffuse, vUv).xyz + halo, 1.);
+    }`,
+};
+
+/* ---------- composer chain ---------- */
+let torusComposer, bloomComposer, finalComposer, finalPass;
+
+function buildComposers(){
+  const w = window.innerWidth, h = window.innerHeight;
+
+  torusComposer = new EffectComposer(renderer);
+  torusComposer.renderToScreen = false;
+  torusComposer.addPass(new RenderPass(scene, camera));
+  torusComposer.addPass(new ShaderPass(GammaCorrectionShader));
+  torusComposer.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), 0.22, 0.2, 0));
+  torusComposer.addPass(new ShaderPass(CopyShader));
+
+  bloomComposer = new EffectComposer(renderer);
+  bloomComposer.renderToScreen = false;
+  bloomComposer.addPass(new RenderPass(scene, camera));
+  bloomComposer.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), 0.5, 0.6, 0));
+  bloomComposer.addPass(new ShaderPass(GammaCorrectionShader));
+
+  finalPass = new ShaderPass(FinalPass);
+  finalPass.uniforms.torusTexture.value = torusComposer.renderTarget1.texture;
+  finalPass.uniforms.bloomTexture.value = bloomComposer.renderTarget1.texture;
+
+  finalComposer = new EffectComposer(renderer);
+  finalComposer.addPass(new RenderPass(scene, camera));
+  finalComposer.addPass(finalPass);
+}
+buildComposers();
+
+/* ---------- orbit controls (never captures input) ---------- */
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.enablePan = false;
+controls.enabled = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = CONFIG.autoRotate;
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+controls.target.set(0, 0, 0);
+
+/* ---------- scene hierarchy ---------- */
+const worldGroup = new THREE.Group();
+const planetGroup = new THREE.Group();
+planetGroup.rotation.z = CONFIG.tilt;
+const cloudGroup = new THREE.Group();
+cloudGroup.rotation.z = CONFIG.tilt;
+cloudGroup.visible = false;
+worldGroup.add(planetGroup);
+worldGroup.add(cloudGroup);
+scene.add(worldGroup);
+
+/* ---------- scroll storytelling stops ---------- */
+const STOPS_X = [{p:0,v:0},{p:0.32,v:-3.1},{p:0.64,v:3.2},{p:1,v:0}];
+const STOPS_Y = [{p:0,v:-4.5},{p:0.32,v:0.55},{p:0.64,v:0.45},{p:1,v:0.15}];
+const STOPS_S = [{p:0,v:2.15},{p:0.32,v:1.0},{p:0.64,v:0.92},{p:1,v:1.12}];
+
+worldGroup.position.set(STOPS_X[0].v, STOPS_Y[0].v, 0);
+worldGroup.scale.setScalar(STOPS_S[0].v);
+
+/* ---------- atmosphere halo (additive billboard) ---------- */
+const glowGeo = new THREE.PlaneGeometry(2, 2);
+const glowMat = new THREE.ShaderMaterial({
+  transparent:true, side:THREE.DoubleSide, depthWrite:false, blending:THREE.AdditiveBlending,
+  uniforms:{ uGlow:{value:hexToVec3(CONFIG.glowColor)}, uIntensity:{value:CONFIG.glowIntensity} },
+  vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+  fragmentShader:`
+    uniform vec3 uGlow; uniform float uIntensity; varying vec2 vUv;
+    void main(){
+      float d = length(vUv - 0.5) * 2.0;
+      float a = pow(clamp(1.0 - d, 0.0, 1.0), 2.2);
+      gl_FragColor = vec4(uGlow * a * uIntensity, a);
+    }`,
+});
+const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+glowMesh.scale.setScalar(CONFIG.planetRadius * 2.3);
+worldGroup.add(glowMesh);
+
+/* ---------- ambient atmosphere motes ---------- */
+function buildMotes(){
+  const count = CONFIG.atmoCount;
+  const positions = new Float32Array(count*3);
+  const sizes = new Float32Array(count);
+  const seeds = new Float32Array(count);
+  for(let i=0;i<count;i++){
+    positions[i*3+0] = Math.random()*2-1;
+    positions[i*3+1] = Math.random()*2-1;
+    positions[i*3+2] = Math.random()*2-1;
+    sizes[i] = CONFIG.atmoSize * (0.4 + Math.random());
+    seeds[i] = Math.random() * 1000;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  geo.setAttribute('seed', new THREE.BufferAttribute(seeds, 1));
+  const mat = new THREE.ShaderMaterial({
+    transparent:true, depthWrite:false, depthTest:false, blending:THREE.AdditiveBlending,
+    uniforms:{
+      uTime:{value:0}, uRes:{value:new THREE.Vector2(window.innerWidth, window.innerHeight)},
+      uColor:{value:hexToVec3(CONFIG.atmoColor)},
+    },
+    vertexShader:`
+      attribute float size; attribute float seed; uniform float uTime; uniform vec2 uRes;
+      varying float vA;
+      vec3 warp(vec3 p, float t){ float c=0.9,a=1.9,b=0.02,s=0.05; p*=2.;
+        p.x+=c*sin(s*t+a*p.y)+t*b; p.y+=c*cos(s*t+a*p.x); p.y+=c*sin(s*t+a*p.z)+t*b;
+        p.z+=c*cos(s*t+a*p.y); p.z+=c*sin(s*t+a*p.x)+t*b; p.x+=c*cos(s*t+a*p.z);
+        return cos(p+vec3(1,2,4)); }
+      void main(){
+        vec3 v = position*4.0 + warp(position, uTime)*1.2;
+        vec4 mv = modelViewMatrix * vec4(v, 1.0);
+        float r = length(v); float farF = 1.0 - smoothstep(5.0, 6.5, r); float nearF = smoothstep(0.0, 0.5, -mv.z);
+        vA = farF * nearF;
+        gl_PointSize = size * uRes.y / 900.0 / -mv.z; gl_PointSize = max(gl_PointSize, 1.0);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader:`
+      uniform vec3 uColor; varying float vA;
+      void main(){ vec2 p = gl_PointCoord - 0.5; float l = length(p); if (l > 0.5) discard;
+        float tex = smoothstep(0.5, 0.0, l); gl_FragColor = vec4(uColor * tex, tex * vA * 0.55); }`,
+  });
+  const points = new THREE.Points(geo, mat);
+  points.layers.set(LAYERS.ENTIRE_SCENE);
+  scene.add(points);
+  return { points, mat };
+}
+const motes = buildMotes();
+
+/* ---------- starfield ---------- */
+function buildStars(){
+  const count = CONFIG.starCount;
+  const positions = new Float32Array(count*3);
+  const seeds = new Float32Array(count);
+  const bright = new Float32Array(count);
+  const R = 90;
+  for(let i=0;i<count;i++){
+    const u = Math.random(), v = Math.random();
+    const theta = 2*Math.PI*u;
+    const phi = Math.acos(2*v - 1);
+    positions[i*3+0] = R * Math.sin(phi) * Math.cos(theta);
+    positions[i*3+1] = R * Math.sin(phi) * Math.sin(theta);
+    positions[i*3+2] = R * Math.cos(phi);
+    seeds[i] = Math.random() * 1000;
+    bright[i] = 0.35 + Math.random() * 0.65;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('seed', new THREE.BufferAttribute(seeds, 1));
+  geo.setAttribute('bright', new THREE.BufferAttribute(bright, 1));
+  const mat = new THREE.ShaderMaterial({
+    transparent:true, depthWrite:false, depthTest:true, blending:THREE.AdditiveBlending,
+    frustumCulled:false,
+    uniforms:{
+      uTime:{value:0}, uSize:{value:CONFIG.starSize}, uFlicker:{value:CONFIG.starFlicker},
+      uColor:{value:hexToVec3(CONFIG.starColor)}, uRes:{value:new THREE.Vector2(window.innerWidth, window.innerHeight)},
+    },
+    vertexShader:`
+      attribute float seed; attribute float bright;
+      uniform float uTime; uniform float uSize; uniform float uFlicker; uniform vec2 uRes;
+      varying float vTw;
+      void main(){
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        float tw = 0.6 + 0.4 * sin(uTime * uFlicker + seed);
+        vTw = bright * tw;
+        gl_PointSize = max(uSize * uRes.y / 900.0 * (90.0 / max(-mv.z, 1.0)), 1.0);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader:`
+      uniform vec3 uColor; varying float vTw;
+      void main(){
+        vec2 p = gl_PointCoord - 0.5; float l = length(p); if (l > 0.5) discard;
+        float core = smoothstep(0.5, 0.0, l);
+        gl_FragColor = vec4(uColor, core * vTw);
+      }`,
+  });
+  const points = new THREE.Points(geo, mat);
+  points.frustumCulled = false;
+  points.layers.set(LAYERS.ENTIRE_SCENE);
+  scene.add(points);
+  return mat;
+}
+const starsMat = buildStars();
+
+/* ---------- loaders ---------- */
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
+const textureLoader = new THREE.TextureLoader();
+textureLoader.setCrossOrigin('anonymous');
+
+function findFirstMesh(root){
+  let found = null;
+  root.traverse((o) => { if(!found && o.isMesh) found = o; });
+  return found;
+}
+
+/* ---------- runtime state shared across the animation loop ---------- */
+let planetUniforms = null;
+let planetMesh = null;
+let planetLoaded = false;
+let entryStart = null;
+let markersMat = null;
+let cloudMeshes = null;
+
+let planetTime = 0, cloudTime = 0, starTime = 0, markerTime = 0;
+const ENTRY_DUR = 1.9, ENTRY_START_Y = -6.5;
+
+/* ---------- planet material injection ---------- */
+function applyPlanetShader(mat, nightTex){
+  mat.metalness = 0;
+  mat.roughness = 1;
+  mat.envMapIntensity = 0;
+  mat.onBeforeCompile = (shader) => {
+    shader.uniforms.time = { value: 0 };
+    shader.uniforms.noiseScale = { value: 30 };
+    shader.uniforms.speedX = { value: 1.5 };
+    shader.uniforms.speedY = { value: 2.0 };
+    shader.uniforms.speedZ = { value: 2.5 };
+    shader.uniforms.rimColor = { value: hexToVec3(CONFIG.rimColor) };
+    shader.uniforms.rimPower = { value: CONFIG.rimPower };
+    shader.uniforms.nightBlendTexture = { value: nightTex };
+    shader.uniforms.nightLights = { value: CONFIG.nightLights };
+    shader.uniforms.terrainDepth = { value: CONFIG.terrainDepth };
+    shader.uniforms.terrainShade = { value: CONFIG.terrainShade };
+    shader.uniforms.oceanGlint = { value: CONFIG.oceanGlint };
+    shader.uniforms.oceanDeep = { value: CONFIG.oceanDeep };
+    shader.uniforms.oceanFlow = { value: CONFIG.oceanFlow };
+    shader.uniforms.oceanFlowSpeed = { value: CONFIG.oceanFlowSpeed };
+    shader.uniforms.oceanFlowScale = { value: CONFIG.oceanFlowScale };
+
+    shader.vertexShader = 'varying vec2 vCustomUv;\n' + shader.vertexShader.replace(
+      'void main() {',
+      'void main() {\n  vCustomUv = uv;'
+    );
+
+    shader.fragmentShader = `
+      uniform float time; uniform float noiseScale; uniform float speedX; uniform float speedY; uniform float speedZ;
+      uniform vec3 rimColor; uniform float rimPower; uniform sampler2D nightBlendTexture; uniform float nightLights;
+      uniform float terrainDepth; uniform float terrainShade; uniform float oceanGlint; uniform float oceanDeep;
+      uniform float oceanFlow; uniform float oceanFlowSpeed; uniform float oceanFlowScale;
+      varying vec2 vCustomUv;
+      ${SNOISE}
+    ` + shader.fragmentShader;
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <dithering_fragment>',
+`#include <dithering_fragment>
+vec3 normalizedNormal = normalize(vNormal);
+vec3 viewDir = normalize(vViewPosition);
+float rim = 1.0 - max(dot(viewDir, normalizedNormal), 0.0);
+rim = pow(rim, rimPower); rim = pow(rim, 1.5); rim *= 0.7;
+vec3 currentColor = gl_FragColor.rgb;
+float blueDom = currentColor.b - max(currentColor.r, currentColor.g);
+float waterMask = clamp(smoothstep(-0.005, 0.03, blueDom), 0.0, 1.0);
+float shimmer = snoise(vec3(vCustomUv.x * noiseScale + time * speedX, vCustomUv.y * noiseScale - time * speedY, time * speedZ));
+gl_FragColor.rgb += waterMask * shimmer * 0.025;
+float fT = time * oceanFlowSpeed * 4.0;
+float fS = 4.0 * oceanFlowScale;
+float warp = snoise(vec3(vCustomUv.x * fS - fT * 0.5, vCustomUv.y * fS + fT * 0.4, fT * 0.5));
+float flow = snoise(vec3(vCustomUv.x * fS * 2.0 + fT * 0.6 + warp, vCustomUv.y * fS * 2.0 - fT * 0.5, fT * 0.7));
+flow = warp * 0.6 + flow * 0.4;
+gl_FragColor.rgb += waterMask * flow * 0.12 * oceanFlow;
+gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(0.01, 0.06, 0.16), waterMask * oceanDeep);
+vec3 finalColor = mix(gl_FragColor.rgb, rimColor, rim);
+gl_FragColor = vec4(finalColor, 1.0);
+vec3 surfPos = -vViewPosition;
+float terrH = dot(texture2D(map, vCustomUv).rgb, vec3(0.299, 0.587, 0.114));
+vec3 sigX = dFdx(surfPos), sigY = dFdy(surfPos);
+vec3 vR1 = cross(sigY, normalizedNormal), vR2 = cross(normalizedNormal, sigX);
+float fDet = dot(sigX, vR1);
+vec3 vGrad = sign(fDet) * (dFdx(terrH) * vR1 + dFdy(terrH) * vR2);
+vec3 bumpedNormal = normalize(abs(fDet) * normalizedNormal - terrainDepth * vGrad);
+vec3 shadeNormal = mix(bumpedNormal, normalizedNormal, waterMask);
+vec3 cityLights = texture2D(nightBlendTexture, vCustomUv).rgb * gl_FragColor.rgb * nightLights;
+vec3 viewSunDir = normalize(vec3(-0.9, 0.18, 0.4));
+float ndl = dot(normalizedNormal, viewSunDir);
+float dayAmt = smoothstep(-0.05, 0.35, ndl);
+float relief = dot(shadeNormal, viewSunDir) - ndl;
+gl_FragColor.rgb *= clamp(1.0 + relief * terrainShade * dayAmt, 0.55, 1.6);
+float nightFactor  = smoothstep(0.18, -0.30, ndl);
+float lightsFactor = smoothstep(0.30, -0.35, ndl);
+gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb * 0.08, nightFactor);
+gl_FragColor.rgb += cityLights * lightsFactor;
+vec3 halfDir = normalize(viewSunDir + viewDir);
+float ripple = snoise(vec3(vCustomUv * 240.0, time * 4.0));
+float ndh = max(dot(normalizedNormal, halfDir) + ripple * 0.02, 0.0);
+float glint = pow(ndh, 140.0);
+gl_FragColor.rgb += glint * waterMask * dayAmt * oceanGlint * vec3(1.0, 0.97, 0.88);`
+    );
+
+    planetUniforms = shader.uniforms;
+  };
+}
+
+/* ---------- cloud shells ---------- */
+function applyCloudShader(mat, opacity, phase){
+  let uniforms = null;
+  mat.onBeforeCompile = (shader) => {
+    shader.uniforms.uTime = { value: 0 };
+    shader.uniforms.noiseScale = { value: 20 };
+    shader.uniforms.uSpeedX = { value: 1 };
+    shader.uniforms.uSpeedY = { value: 2 };
+    shader.uniforms.uSpeedZ = { value: 2 };
+    shader.uniforms.uOpacity = { value: opacity };
+    shader.uniforms.uPhase = { value: phase };
+
+    shader.vertexShader = 'varying vec2 vCloudUv;\n' + shader.vertexShader.replace(
+      'void main() {',
+      'void main() {\n  vCloudUv = uv;'
+    );
+
+    shader.fragmentShader = `
+      uniform float uTime; uniform float noiseScale; uniform float uSpeedX; uniform float uSpeedY; uniform float uSpeedZ;
+      uniform float uOpacity; uniform float uPhase;
+      varying vec2 vCloudUv;
+      ${SNOISE}
+    ` + shader.fragmentShader;
+
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <dithering_fragment>',
+`#include <dithering_fragment>
+gl_FragColor.rgb = vec3(1.0);
+float cloudNoise = snoise(vec3(vCloudUv.x * noiseScale + uTime * uSpeedX + uPhase, vCloudUv.y * noiseScale - uTime * uSpeedY + uPhase, uTime * uSpeedZ + uPhase));
+float cloudNdv = max(dot(normalize(vNormal), normalize(vViewPosition)), 0.0);
+float cloudEdge = pow(1.0 - cloudNdv, 3.0);
+float cloudMod = mix(cloudNoise, 1.0, cloudEdge);
+float cloudNdl = dot(normalize(vNormal), normalize(vec3(-0.9, 0.18, 0.4)));
+float cloudDay = 1.0 - smoothstep(0.30, -0.30, cloudNdl) * 0.9;
+gl_FragColor.a *= cloudMod * uOpacity * cloudDay;`
+    );
+
+    uniforms = shader.uniforms;
+  };
+  return () => uniforms;
+}
+
+function buildClouds(){
+  textureLoader.load(PLANET_CLOUDS_PNG, (tex) => {
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(5, 5);
+    const layers = [
+      { h:CONFIG.cloud1Height, o:CONFIG.cloud1Opacity, ry:0.0, phase:0.0,  spinKey:'cloud1Spin' },
+      { h:CONFIG.cloud2Height, o:CONFIG.cloud2Opacity, ry:2.2, phase:13.0, spinKey:'cloud2Spin' },
+      { h:CONFIG.cloud3Height, o:CONFIG.cloud3Opacity, ry:4.3, phase:27.0, spinKey:'cloud3Spin' },
+    ];
+    cloudMeshes = layers.map((layer) => {
+      const geo = new THREE.SphereGeometry(CONFIG.planetRadius * layer.h, 64, 64);
+      const mat = new THREE.MeshStandardMaterial({ map: tex, transparent: true, depthWrite: false });
+      const getUniforms = applyCloudShader(mat, layer.o, layer.phase);
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.rotation.y = layer.ry;
+      mesh.renderOrder = 2;
+      cloudGroup.add(mesh);
+      return { mesh, spinKey: layer.spinKey, getUniforms };
+    });
+    cloudGroup.visible = true;
+  }, undefined, (err) => console.warn('cloud texture failed to load', err));
+}
+
+/* ---------- land markers (golden radar pings) ---------- */
+function buildMarkers(mesh){
+  try{
+    const tex = mesh.material.map;
+    if(!tex || !tex.image) return;
+    const img = tex.image;
+    const canvasEl = document.createElement('canvas');
+    canvasEl.width = img.width; canvasEl.height = img.height;
+    const ctx = canvasEl.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const data = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height).data;
+
+    function isLand(u, v){
+      const x = Math.min(canvasEl.width - 1, Math.max(0, Math.floor(u * canvasEl.width)));
+      const y = Math.min(canvasEl.height - 1, Math.max(0, Math.floor((1 - v) * canvasEl.height)));
+      const idx = (y * canvasEl.width + x) * 4;
+      const r = data[idx], g = data[idx+1], b = data[idx+2];
+      return !(b > r + 6 && b > g + 6);
+    }
+
+    const geo = mesh.geometry;
+    const posAttr = geo.attributes.position;
+    const uvAttr = geo.attributes.uv;
+    const index = geo.index;
+    const triCount = index ? index.count / 3 : posAttr.count / 3;
+
+    const getIdx = (t, k) => index ? index.getX(t*3+k) : t*3+k;
+
+    const pA = new THREE.Vector3(), pB = new THREE.Vector3(), pC = new THREE.Vector3();
+    const areas = new Float32Array(triCount);
+    const cumulative = new Float32Array(triCount);
+    let totalArea = 0;
+    const triangleHelper = new THREE.Triangle();
+    for(let t=0;t<triCount;t++){
+      pA.fromBufferAttribute(posAttr, getIdx(t,0));
+      pB.fromBufferAttribute(posAttr, getIdx(t,1));
+      pC.fromBufferAttribute(posAttr, getIdx(t,2));
+      triangleHelper.set(pA, pB, pC);
+      const area = triangleHelper.getArea();
+      areas[t] = area;
+      totalArea += area;
+      cumulative[t] = totalArea;
+    }
+
+    function pickTriangle(){
+      const r = Math.random() * totalArea;
+      let lo = 0, hi = triCount - 1;
+      while(lo < hi){
+        const mid = (lo + hi) >> 1;
+        if(cumulative[mid] < r) lo = mid + 1; else hi = mid;
+      }
+      return lo;
+    }
+
+    const positions = [];
+    const seeds = [];
+    const uvA = new THREE.Vector2(), uvB = new THREE.Vector2(), uvC = new THREE.Vector2();
+    let attempts = 0;
+    const maxAttempts = CONFIG.markerCount * 60;
+    while(positions.length/3 < CONFIG.markerCount && attempts < maxAttempts){
+      attempts++;
+      const t = pickTriangle();
+      const i0 = getIdx(t,0), i1 = getIdx(t,1), i2 = getIdx(t,2);
+      let r1 = Math.random(), r2 = Math.random();
+      if(r1 + r2 > 1){ r1 = 1 - r1; r2 = 1 - r2; }
+      const a = 1 - r1 - r2, b = r1, c = r2;
+
+      pA.fromBufferAttribute(posAttr, i0);
+      pB.fromBufferAttribute(posAttr, i1);
+      pC.fromBufferAttribute(posAttr, i2);
+      uvA.fromBufferAttribute(uvAttr, i0);
+      uvB.fromBufferAttribute(uvAttr, i1);
+      uvC.fromBufferAttribute(uvAttr, i2);
+
+      const u = uvA.x*a + uvB.x*b + uvC.x*c;
+      const v = uvA.y*a + uvB.y*b + uvC.y*c;
+      if(!isLand(u, v)) continue;
+
+      const px = pA.x*a + pB.x*b + pC.x*c;
+      const py = pA.y*a + pB.y*b + pC.y*c;
+      const pz = pA.z*a + pB.z*b + pC.z*c;
+      const len = Math.sqrt(px*px + py*py + pz*pz) || 1;
+      const lift = 1.012;
+      positions.push(px*lift, py*lift, pz*lift);
+      seeds.push(Math.random() * 1000);
+    }
+
+    if(positions.length === 0) return;
+
+    const geo2 = new THREE.BufferGeometry();
+    geo2.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geo2.setAttribute('seed', new THREE.Float32BufferAttribute(seeds, 1));
+    const mat2 = new THREE.ShaderMaterial({
+      transparent:true, depthWrite:false, depthTest:true, blending:THREE.AdditiveBlending,
+      uniforms:{
+        uTime:{value:0}, uColor:{value:hexToVec3(CONFIG.markerColor)},
+        uSize:{value:CONFIG.markerSize}, uSpeed:{value:CONFIG.markerSpeed},
+        uRes:{value:new THREE.Vector2(window.innerWidth, window.innerHeight)},
+      },
+      vertexShader:`
+        attribute float seed; uniform float uSize; uniform vec2 uRes;
+        varying float vSeed; varying float vFade;
+        void main(){
+          vSeed = seed;
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          vec3 vn = normalize(normalMatrix * normalize(position));
+          vec3 vd = normalize(-mv.xyz);
+          vFade = smoothstep(0.15, 0.5, dot(vn, vd));
+          gl_PointSize = max(uSize * uRes.y / 900.0 * (7.0 / max(-mv.z, 1.0)), 2.0);
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader:`
+        uniform vec3 uColor; uniform float uTime; uniform float uSpeed;
+        varying float vSeed; varying float vFade;
+        void main(){
+          if (vFade <= 0.001) discard;
+          vec2 p = gl_PointCoord - 0.5;
+          float d = length(p) * 2.0;
+          if (d > 1.0) discard;
+          float core = smoothstep(0.30, 0.0, d) * 1.2;
+          float ph = fract(uTime * uSpeed + vSeed);
+          float ring = smoothstep(0.07, 0.0, abs(d - ph)) * (1.0 - ph);
+          gl_FragColor = vec4(uColor, clamp(core + ring, 0.0, 1.0) * vFade);
+        }`,
+    });
+    const markerPoints = new THREE.Points(geo2, mat2);
+    mesh.add(markerPoints);
+    markersMat = mat2;
+  } catch(err){
+    console.warn('land marker sampling skipped (likely cross-origin texture):', err);
+  }
+}
+
+/* ---------- load the planet ---------- */
+gltfLoader.load(PLANET_LIGHTS_GLB, (lightsGltf) => {
+  const lightsMesh = findFirstMesh(lightsGltf.scene);
+  const nightTex = lightsMesh ? lightsMesh.material.map : null;
+
+  gltfLoader.load(PLANET_GLB, (gltf) => {
+    const mesh = findFirstMesh(gltf.scene);
+    if(!mesh) return;
+    mesh.geometry.computeBoundingSphere();
+    const radius = mesh.geometry.boundingSphere ? mesh.geometry.boundingSphere.radius : 1;
+    const scale = CONFIG.planetRadius / (radius || 1);
+    mesh.scale.setScalar(scale);
+
+    const mat = mesh.material.clone();
+    applyPlanetShader(mat, nightTex);
+    mesh.material = mat;
+
+    planetGroup.add(mesh);
+    planetMesh = mesh;
+    planetLoaded = true;
+    entryStart = REDUCED ? null : performance.now();
+
+    buildClouds();
+    buildMarkers(mesh);
+  }, undefined, (err) => console.warn('planet.glb failed to load', err));
+}, undefined, (err) => console.warn('planet-lights.glb failed to load', err));
+
+/* ---------- animation loop ---------- */
+const clock = new THREE.Clock();
+let curX = STOPS_X[0].v, curY = STOPS_Y[0].v, curS = STOPS_S[0].v, curP = 0;
+let spinPhase = 0;
+
+function animate(){
+  requestAnimationFrame(animate);
+  let dt = clock.getDelta();
+  dt = Math.min(dt, 0.05);
+  const elapsed = clock.getElapsedTime();
+
+  planetTime += dt / 12;
+  cloudTime += dt / 20;
+  starTime += dt;
+  markerTime += dt;
+
+  if(planetUniforms) planetUniforms.time.value = planetTime;
+  if(cloudMeshes){
+    cloudMeshes.forEach((c) => {
+      const u = c.getUniforms();
+      if(u) u.uTime.value = cloudTime;
+      c.mesh.rotation.y += dt * CONFIG[c.spinKey];
+    });
+  }
+  if(starsMat) starsMat.uniforms.uTime.value = starTime;
+  if(markersMat) markersMat.uniforms.uTime.value = markerTime;
+  if(motes){
+    motes.mat.uniforms.uTime.value = elapsed * CONFIG.atmoSpeed * 8;
+    motes.points.position.copy(camera.position);
+  }
+  finalPass.uniforms.iTime.value = elapsed;
+
+  const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+  const pTarget = scrollMax > 0 ? clamp(window.scrollY / scrollMax, 0, 1) : 0;
+  curP += (pTarget - curP) * Math.min(1, dt * 4.5);
+
+  const sideScale = clamp(window.innerWidth / 1200, 0.5, 1);
+  const k = Math.min(1, dt * 3.2);
+  const targetX = sample(STOPS_X, curP) * sideScale;
+  const targetY = sample(STOPS_Y, curP);
+  const targetS = sample(STOPS_S, curP);
+  curX += (targetX - curX) * k;
+  curY += (targetY - curY) * k;
+  curS += (targetS - curS) * k;
+
+  let entryY = 0;
+  if(planetLoaded && entryStart !== null){
+    const t = Math.min(1, (performance.now() - entryStart) / 1000 / ENTRY_DUR);
+    const eased = 1 - Math.pow(1 - t, 3);
+    entryY = Lerp(ENTRY_START_Y, 0, eased);
+    if(t >= 1) entryStart = null;
+  }
+
+  worldGroup.position.set(curX, curY + entryY, 0);
+  worldGroup.scale.setScalar(curS);
+
+  spinPhase += dt * CONFIG.spin;
+  planetGroup.rotation.y = CONFIG.initRotation + spinPhase + curP * Math.PI * 1.6;
+
+  glowMesh.quaternion.copy(camera.quaternion);
+
+  controls.update();
+
+  camera.layers.set(LAYERS.TORUS_SCENE);
+  torusComposer.render();
+  camera.layers.set(LAYERS.BLOOM_SCENE);
+  bloomComposer.render();
+  camera.layers.set(LAYERS.ENTIRE_SCENE);
+  finalComposer.render();
+}
+animate();
+
+/* ---------- resize ---------- */
+function onResize(){
+  const w = window.innerWidth, h = window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h, false);
+  const pr = renderer.getPixelRatio();
+  [torusComposer, bloomComposer, finalComposer].forEach((c) => c.setSize(w, h));
+  const resVec = new THREE.Vector2(w * pr, h * pr);
+  if(starsMat) starsMat.uniforms.uRes.value.copy(resVec);
+  if(motes) motes.mat.uniforms.uRes.value.copy(resVec);
+  if(markersMat) markersMat.uniforms.uRes.value.copy(resVec);
+}
+window.addEventListener('resize', onResize);
+</script>
+
+<script>
+document.getElementById('demo-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('demo-btn');
+  const status = document.getElementById('demo-status');
+  btn.disabled = true;
+  status.style.color = 'var(--muted)';
+  status.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+    form.reset();
+    status.style.color = 'var(--accent)';
+    status.textContent = "Thanks! We'll reply within one business day.";
+  } catch (err) {
+    status.style.color = '#ff8a8a';
+    status.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
