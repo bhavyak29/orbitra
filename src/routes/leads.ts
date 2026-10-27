@@ -56,7 +56,7 @@ router.patch('/:id', requireAdmin, async (req, res) => {
   }
   try {
     const lead = await prisma.lead.update({
-      where: { id: req.params.id },
+      where: { id: String(req.params.id) },
       data: { stage: parsed.data.stage },
     });
     res.json(lead);
@@ -67,7 +67,7 @@ router.patch('/:id', requireAdmin, async (req, res) => {
 
 router.delete('/:id', requireAdmin, async (req, res) => {
   try {
-    await prisma.lead.delete({ where: { id: req.params.id } });
+    await prisma.lead.delete({ where: { id: String(req.params.id) } });
     res.json({ ok: true });
   } catch {
     res.status(404).json({ error: 'Lead not found.' });
