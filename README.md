@@ -7,7 +7,7 @@ A revenue-intelligence SaaS marketing site with a working backend: visitors book
 **Live demo:** https://orbitra-jomr.onrender.com
 *(Hosted on a free tier. The first load after a quiet period can take up to a minute while the server wakes up.)*
 
-![Home page](docs/home.png)
+![Home page](docs/home.jpg)
 
 ## Features
 
@@ -65,7 +65,7 @@ Run the tests with `npm test`.
 
 | Contact form | Admin dashboard |
 |---|---|
-| ![Contact](docs/contact.png) | ![Admin](docs/admin.png) |
+| ![Contact](docs/contact.jpg) | ![Admin](docs/admin.jpg) |
 
 ## Project structure
 
